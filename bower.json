@@ -1,0 +1,21 @@
+{
+  "name": "simple-blog",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Christian.Zindel@mrm-mccann.de"
+  ],
+  "license": "MIT",
+  "moduleType": [
+    "globals"
+  ],
+  "homepage": "",
+  "private": true,
+  "dependencies": {
+    "angular": "^1.4.0",
+    "angular-resource": "^1.4.0",
+    "angular-route": "^1.4.0",
+    "bootstrap": "^3.2.0",
+    "underscore": "~1.8.3"
+  }
+}
