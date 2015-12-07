@@ -1,5 +1,39 @@
 <div class="row">
-  <div class="col-md-9">
-    <a class="btn btn-default" href="#/new" role="button">New Post</a>
-  </div>
+    <div class="col-md-9">
+        <a class="btn btn-default" href="#/new" role="button">New Post</a>
+
+        <div ng-repeat="post in blogPosts" class="blog-post">
+            <div class="inner">
+                <h2>{{post.title}}</h2>
+                <img ng-src="{{post.image}}?no_cache={{post.created_timestamp}}" class="img-responsive">
+
+                <p>{{post.description | limitTo:500 }}...</p>
+            </div>
+            <div>
+                <p>{{post.creator}}</p>
+                <p>{{post.created_timestamp | date}}</p>
+                <ul>
+                    <li ng-repeat="cat in post.categories.split(',')">
+                        <a>{{cat}}</a>
+                    </li>
+                </ul>
+            </div>
+            <hr>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <h3>Categories</h3>
+        <ul>
+            <li ng-repeat="categoriy in categories">
+                <button type="button" class="btn btn-link" ng-click="filterByCategory(categoriy)">{{categoriy}}</button>
+            </li>
+        </ul>
+
+        <h3>Authors</h3>
+        <ul>
+            <li ng-repeat="author in authors">
+                <button type="button" class="btn btn-link" ng-click="filterByAuthor(author)">{{author}}</button>
+            </li>
+        </ul>
+    </div>
 </div>
