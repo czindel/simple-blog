@@ -13,6 +13,10 @@ module.exports = function(grunt) {
                 options: {
                     spawn: true
                 }
+            },
+            stylesheets:{
+                files: ['public/stylesheets/**/*.less'],
+                tasks: ['less:development']
             }
         },
         shell: {
@@ -32,6 +36,29 @@ module.exports = function(grunt) {
                 src: ['app/scripts/**/*.js'],
                 dest: 'public/javascripts/built.js'
             }
+        },
+        less: {
+            development: {
+                files: {
+                    "public/stylesheets/style.css": "public/stylesheets/style.less"
+                }
+            },
+//            production: {
+//                options: {
+//                    paths: ["assets/css"],
+//                    plugins: [
+//                        new (require('less-plugin-autoprefix'))({browsers: ["last 2 versions"]}),
+//                        new (require('less-plugin-clean-css'))(cleanCssOptions)
+//                    ],
+//                    modifyVars: {
+//                        imgPath: '"http://mycdn.com/path/to/images"',
+//                        bgColor: 'red'
+//                    }
+//                },
+//                files: {
+//                    "path/to/result.css": "path/to/source.less"
+//                }
+//            }
         }
     });
 
