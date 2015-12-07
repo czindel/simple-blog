@@ -30,3 +30,6 @@ node_modules
 npm-debug.log
 .idea
 bower_components
+built.js
+built.js.map
+style.css
