@@ -1,0 +1,29 @@
+<form name="newBlogPost" ng-submit="create()" novalidate>
+    <p ng-if="newBlogPost.$submitted && newBlogPost.$invalid">Please fill out all mandatory fields</p>
+    <div class="form-group"
+         ng-class="{'has-error': (newBlogPost.$submitted || newBlogPost.title.$dirty) && newBlogPost.title.$invalid}">
+        <label for="blogpost_title" class="control-label">Title *</label>
+        <input type="text" class="form-control" id="blogpost_title" name="title" ng-model="newPost.title" required>
+    </div>
+    <div class="form-group">
+        <label for="blogpost_image" class="control-label">Image URL</label>
+        <input type="url" class="form-control" id="blogpost_image" ng-model="newPost.image">
+    </div>
+    <div class="form-group"
+         ng-class="{'has-error': (newBlogPost.$submitted || newBlogPost.description.$dirty) && newBlogPost.description.$invalid}">
+        <label for="blogpost_description" class="control-label">Description *</label>
+        <textarea class="form-control" id="blogpost_description" name="description" ng-model="newPost.description" required></textarea>
+    </div>
+    <div class="form-group"
+         ng-class="{'has-error': (newBlogPost.$submitted || newBlogPost.creator.$dirty) && newBlogPost.creator.$invalid}">
+        <label for="blogpost_creator" class="control-label">Creator *</label>
+        <input type="text" class="form-control" id="blogpost_creator" name="creator" ng-model="newPost.creator" required>
+    </div>
+    <div class="form-group"
+         ng-class="{'has-error': (newBlogPost.$submitted || newBlogPost.categories.$dirty) && newBlogPost.categories.$invalid}">
+        <label for="blogpost_categories" class="control-label">Categories(separate multiple by comma) *</label>
+        <input type="text" class="form-control" id="blogpost_categories" name="categories" ng-model="newPost.categories" required>
+    </div>
+
+    <button type="submit" class="btn btn-default">Create</button>
+</form>
