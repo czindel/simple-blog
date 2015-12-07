@@ -9,10 +9,7 @@ module.exports = function(grunt) {
         watch: {
             scripts: {
                 files: ['app/scripts/**/*.js'],
-                tasks: ['concat:js'],
-                options: {
-                    spawn: true
-                }
+                tasks: ['jshint', 'concat:js']
             },
             stylesheets:{
                 files: ['public/stylesheets/**/*.less'],
@@ -59,6 +56,14 @@ module.exports = function(grunt) {
 //                    "path/to/result.css": "path/to/source.less"
 //                }
 //            }
+        },
+        jshint: {
+            default: {
+//                options: {
+//                    '-W015': true,
+//                },
+                src: ['app/scripts/**/*.js']
+            }
         }
     });
 
