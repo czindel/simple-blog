@@ -23,6 +23,10 @@
             templateUrl: 'views/new.html',
             controller: 'BlogPostNewCtrl'
           })
+          .when('/detail/:blogPostId', {
+            templateUrl: 'views/detail.html',
+            controller: 'BlogPostDetailCtrl'
+          })
           .otherwise({
             redirectTo: '/'
           });
