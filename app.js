@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 var uuid = require('node-uuid');
 var fs = require('fs');
 var path = require('path');
+var _ = require('underscore');
 
 
 var app = express();
@@ -30,12 +31,12 @@ app.post('/rest_api/blogposts', function (req, res, next) {
     req.body.created_timestamp = new Date().toISOString();
     req.body.id = uuid.v4();
 
-    fs.readFile(blogPostData, function (err, data) {
+    getBlogPostData(function (err, data) {
 
         if (err) {
             res.status(500).send('fs read error');
         }
-        else{
+        else {
 
             var jsonData = JSON.parse(data);
             jsonData.push(req.body);
@@ -52,11 +53,51 @@ app.post('/rest_api/blogposts', function (req, res, next) {
     });
 });
 app.get('/rest_api/blogposts', function (req, res, next) {
-    res.sendFile(blogPostData);
+    getBlogPostData(function (err, data) {
+        if (err) {
+            res.status(500).send('fs read error');
+        }
+        else{
+
+            if(req.query.category){
+                res.send(_.filter(data, function (item) {
+                    var categories = _.invoke(item.categories.split(','), 'trim');
+                    return _.contains(categories, req.query.category);
+                }))
+            }
+            else if(req.query.author){
+                res.send(_.where(data, {creator: req.query.author}))
+            }
+            else{
+                res.send(data);
+            }
+        }
+    });
 });
 app.get('/rest_api/blogposts/:id', function (req, res, next) {
 
+    getBlogPostData(function (err, data) {
+        if (err) {
+            res.status(500).send('fs read error');
+        }
+        else{
+            res.send(_.findWhere(data, {id: req.params.id}))
+        }
+    });
 });
+
+function getBlogPostData(callback) {
+
+    fs.readFile(blogPostData, function (err, data) {
+
+        if (err) {
+            callback(err)
+        }
+        else {
+            callback(null, JSON.parse(data));
+        }
+    })
+}
 
 
 // catch 404 and forward to error handler
