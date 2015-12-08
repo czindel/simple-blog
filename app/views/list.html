@@ -1,39 +1,47 @@
 <div class="row">
-    <div class="col-md-9">
-        <a class="btn btn-default" href="#/new" role="button">New Post</a>
 
-        <div ng-repeat="post in blogPosts" class="blog-post">
-            <div class="inner">
-                <h2>{{post.title}}</h2>
-                <img ng-src="{{post.image}}?no_cache={{post.created_timestamp}}" class="img-responsive">
-
-                <p>{{post.description | limitTo:500 }}...</p>
-            </div>
-            <div>
-                <p>{{post.creator}}</p>
-                <p>{{post.created_timestamp | date}}</p>
-                <ul>
-                    <li ng-repeat="cat in post.categories.split(',')">
-                        <a>{{cat}}</a>
-                    </li>
-                </ul>
-            </div>
-            <hr>
-        </div>
-    </div>
-    <div class="col-md-3">
+    <div class="col-md-3 col-sm-12 col-md-push-9">
         <h3>Categories</h3>
         <ul>
             <li ng-repeat="categoriy in categories">
-                <button type="button" class="btn btn-link" ng-click="filterByCategory(categoriy)">{{categoriy}}</button>
+                <a href="" ng-click="filterByCategory($event, categoriy)">{{categoriy}}</a>
             </li>
         </ul>
 
         <h3>Authors</h3>
         <ul>
             <li ng-repeat="author in authors">
-                <button type="button" class="btn btn-link" ng-click="filterByAuthor(author)">{{author}}</button>
+                <a href="" ng-click="filterByAuthor($event, author)">{{author}}</a>
             </li>
         </ul>
     </div>
+
+    <div class="col-md-9 col-sm-12 col-md-pull-3">
+        <p ng-show="filterCategory"><strong>Posts filtered by category "{{filterCategory}}":</strong></p>
+        <p ng-show="filterAuthor"><strong>Posts filtered by author "{{filterAuthor}}":</strong></p>
+
+        <div ng-repeat="post in blogPosts" class="blog-post">
+            <div class="inner">
+                <h2><a ng-href="#/detail/{{post.id}}">{{post.title}}</a></h2>
+                <img ng-src="{{post.image}}?no_cache={{post.created_timestamp}}" class="img-responsive">
+
+                <p>{{post.description | limitTo:500 }}...</p>
+            </div>
+            <ul class="list-inline">
+                <li>
+                    Autor: <a href="" ng-click="filterByAuthor($event, post.creator)">{{post.creator}}</a></li>
+                <li>Created: {{post.created_timestamp | date}}</li>
+                <li>Categories:</li>
+                <li>
+                    <ul class="list-inline">
+                        <li ng-repeat="category in post.categories.split(',')">
+                            <a href="" ng-click="filterByCategory($event, category)">{{category}}</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <hr>
+        </div>
+    </div>
+
 </div>

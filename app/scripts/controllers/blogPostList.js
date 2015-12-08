@@ -1,5 +1,4 @@
-(function () {
-    'use strict';
+(function () { 'use strict';
 
     /**
      * @ngdoc function
@@ -11,41 +10,65 @@
     angular.module('simpleBlogApp')
         .controller('BlogPostListCtrl', ['$scope', 'BlogPost', function ($scope, BlogPost) {
 
-            var blogPosts = BlogPost.query(function () {
+            $scope.showAll = function () {
 
-                $scope.blogPosts = blogPosts;
+                $scope.filterAuthor = null;
+                $scope.filterCategory = null;
 
-                $scope.categories = _.chain(blogPosts)
-                    .map(function (item) {
-                        return parseCategories(item.categories);
-                    })
-                    .flatten()
-                    .uniq()
-                    .value();
+                var blogPosts = BlogPost.query(function () {
 
-                $scope.authors = _.chain(blogPosts)
-                    .pluck('creator')
-                    .uniq()
-                    .value();
-            });
+                    $scope.blogPosts = blogPosts;
 
-            $scope.filterByCategory = function (category) {
+                    $scope.categories = _.chain(blogPosts)
+                        .map(function (item) {
+                            return parseCategories(item.categories);
+                        })
+                        .flatten()
+                        .uniq()
+                        .value();
 
-                $scope.blogPosts = _.filter(blogPosts, function (item) {
-                    return _.contains(parseCategories(item.categories), category);
+                    $scope.authors = _.chain(blogPosts)
+                        .pluck('creator')
+                        .uniq()
+                        .value();
                 });
             };
 
-            $scope.filterByAuthor = function (author) {
+            $scope.filterByCategory = function (event, category) {
 
-                $scope.blogPosts = _.filter(blogPosts, function (item) {
-                    return item.creator === author;
+                event.preventDefault();
+
+                $scope.filterAuthor = null;
+                $scope.filterCategory = category;
+
+                var postsByCategory = BlogPost.query({category: category}, function () {
+                    $scope.blogPosts = postsByCategory;
                 });
+//                $scope.blogPosts = _.filter(blogPosts, function (item) {
+//                    return _.contains(parseCategories(item.categories), category);
+//                });
+            };
+
+            $scope.filterByAuthor = function (event, author) {
+
+                event.preventDefault();
+
+                $scope.filterAuthor = author;
+                $scope.filterCategory = null;
+
+                var postsByAuthor = BlogPost.query({author: author}, function () {
+                    $scope.blogPosts = postsByAuthor;
+                });
+//                $scope.blogPosts = _.filter(blogPosts, function (item) {
+//                    return item.creator === author;
+//                });
             };
 
             function parseCategories(categoryString){
                 return _.invoke(categoryString.split(','), 'trim');
             }
+
+            $scope.showAll();
 
         }]);
 }());
