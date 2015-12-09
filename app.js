@@ -24,7 +24,7 @@ app.use('/views', express.static(path.join(__dirname, 'app/views')));
 
 app.use('/', require('./routes/index'));
 
-var blogPostData = path.resolve('blogPostData.json');
+var blogPostData = path.resolve('data/blogPosts.json');
 
 app.post('/rest_api/blogposts', function (req, res, next) {
 
