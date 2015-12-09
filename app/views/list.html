@@ -21,26 +21,7 @@
         <p ng-show="filterAuthor"><strong>Posts filtered by author "{{filterAuthor}}":</strong></p>
 
         <div ng-repeat="post in blogPosts" class="blog-post">
-            <div class="inner">
-                <h2><a ng-href="#/detail/{{post.id}}">{{post.title}}</a></h2>
-                <img ng-src="{{post.image}}?no_cache={{post.created_timestamp}}" class="img-responsive">
-
-                <p>{{post.description | limitTo:500 }}...</p>
-            </div>
-            <ul class="list-inline">
-                <li>
-                    Autor: <a href="" ng-click="filterByAuthor($event, post.creator)">{{post.creator}}</a></li>
-                <li>Created: {{post.created_timestamp | date}}</li>
-                <li>Categories:</li>
-                <li>
-                    <ul class="list-inline">
-                        <li ng-repeat="category in post.categories.split(',')">
-                            <a href="" ng-click="filterByCategory($event, category)">{{category}}</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            <hr>
+            <blog-post post="post"></blog-post>
         </div>
     </div>
 

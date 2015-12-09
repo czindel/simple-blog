@@ -8,22 +8,9 @@
 
                 <p>{{postDetails.description }}</p>
             </div>
-            <div>
-                <ul class="list-inline">
-                    <li>
-                        Autor: <a href="" ng-click="filterByAuthor($event, postDetails.creator)">{{postDetails.creator}}</a></li>
-                    <li>Created: {{postDetails.created_timestamp | date}}</li>
-                    <li>Categories:</li>
-                    <li>
-                        <ul class="list-inline">
-                            <li ng-repeat="category in postDetails.categories.split(',')">
-                                <a href="" ng-click="filterByCategory($event, category)">{{category}}</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+
             <hr>
+            <post-details post="postDetails"></post-details>
         </div>
     </div>
     <div class="col-md-3"></div>

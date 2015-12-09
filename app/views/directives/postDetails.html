@@ -1,0 +1,13 @@
+<ul class="list-inline">
+    <li>
+        Autor: <a ng-href="#/by-author/{{post.creator}}">{{post.creator}}</a></li>
+    <li>Created: {{post.created_timestamp | date}}</li>
+    <li>Categories:</li>
+    <li>
+        <ul class="list-inline">
+            <li ng-repeat="category in post.categories.split(',')">
+                <a ng-href="#/by-category/{{category}}">{{category}}</a>
+            </li>
+        </ul>
+    </li>
+</ul>
