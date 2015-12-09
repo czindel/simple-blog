@@ -27,6 +27,14 @@
             templateUrl: 'views/detail.html',
             controller: 'BlogPostDetailCtrl'
           })
+          .when('/by-category/:category', {
+            templateUrl: 'views/by-category.html',
+            controller: 'BlogPostByCategoryCtrl'
+          })
+          .when('/by-author/:author', {
+            templateUrl: 'views/by-author.html',
+            controller: 'BlogPostByAuthorCtrl'
+          })
           .otherwise({
             redirectTo: '/'
           });

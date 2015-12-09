@@ -34,36 +34,6 @@
                 });
             };
 
-            $scope.filterByCategory = function (event, category) {
-
-                event.preventDefault();
-
-                $scope.filterAuthor = null;
-                $scope.filterCategory = category;
-
-                var postsByCategory = BlogPost.query({category: category}, function () {
-                    $scope.blogPosts = postsByCategory;
-                });
-//                $scope.blogPosts = _.filter(blogPosts, function (item) {
-//                    return _.contains(parseCategories(item.categories), category);
-//                });
-            };
-
-            $scope.filterByAuthor = function (event, author) {
-
-                event.preventDefault();
-
-                $scope.filterAuthor = author;
-                $scope.filterCategory = null;
-
-                var postsByAuthor = BlogPost.query({author: author}, function () {
-                    $scope.blogPosts = postsByAuthor;
-                });
-//                $scope.blogPosts = _.filter(blogPosts, function (item) {
-//                    return item.creator === author;
-//                });
-            };
-
             function parseCategories(categoryString){
                 return _.invoke(categoryString.split(','), 'trim');
             }

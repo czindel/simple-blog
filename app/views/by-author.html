@@ -1,0 +1,14 @@
+<div class="row">
+
+    <div class="col-md-3 col-sm-12 col-md-push-9">
+    </div>
+
+    <div class="col-md-9 col-sm-12 col-md-pull-3">
+        <h2>Posts filtered by author "{{author}}":</h2>
+
+        <div ng-repeat="post in blogPosts" class="blog-post">
+            <blog-post post="post"></blog-post>
+        </div>
+    </div>
+
+</div>

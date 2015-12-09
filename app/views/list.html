@@ -3,22 +3,20 @@
     <div class="col-md-3 col-sm-12 col-md-push-9">
         <h3>Categories</h3>
         <ul>
-            <li ng-repeat="categoriy in categories">
-                <a href="" ng-click="filterByCategory($event, categoriy)">{{categoriy}}</a>
+            <li ng-repeat="category in categories">
+                <a ng-href="#/by-category/{{category}}">{{category}}</a>
             </li>
         </ul>
 
         <h3>Authors</h3>
         <ul>
             <li ng-repeat="author in authors">
-                <a href="" ng-click="filterByAuthor($event, author)">{{author}}</a>
+                <a ng-href="#/by-author/{{author}}">{{author}}</a>
             </li>
         </ul>
     </div>
 
     <div class="col-md-9 col-sm-12 col-md-pull-3">
-        <p ng-show="filterCategory"><strong>Posts filtered by category "{{filterCategory}}":</strong></p>
-        <p ng-show="filterAuthor"><strong>Posts filtered by author "{{filterAuthor}}":</strong></p>
 
         <div ng-repeat="post in blogPosts" class="blog-post">
             <blog-post post="post"></blog-post>
