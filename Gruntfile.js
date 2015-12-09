@@ -26,7 +26,6 @@ module.exports = function(grunt) {
         },
         concat: {
             options: {
-//                separator: ';',
                 sourceMap: true
             },
             js: {
@@ -39,43 +38,21 @@ module.exports = function(grunt) {
                 files: {
                     "public/stylesheets/style.css": "public/stylesheets/style.less"
                 }
-            },
-//            production: {
-//                options: {
-//                    paths: ["assets/css"],
-//                    plugins: [
-//                        new (require('less-plugin-autoprefix'))({browsers: ["last 2 versions"]}),
-//                        new (require('less-plugin-clean-css'))(cleanCssOptions)
-//                    ],
-//                    modifyVars: {
-//                        imgPath: '"http://mycdn.com/path/to/images"',
-//                        bgColor: 'red'
-//                    }
-//                },
-//                files: {
-//                    "path/to/result.css": "path/to/source.less"
-//                }
-//            }
+            }
         },
         jshint: {
             default: {
-//                options: {
-//                    '-W015': true,
-//                },
                 src: ['app/scripts/**/*.js']
             }
         }
     });
 
 
-	grunt.registerTask('default', ['build']);
+	grunt.registerTask('default', ['server']);
 
     grunt.registerTask('server', [
-        'shell:express',
-    ]);
-
-    grunt.registerTask('build', [
-//        'express:dev'
+        'shell:install',
+        'shell:express'
     ]);
 };
 
