@@ -51,7 +51,9 @@ module.exports = function(grunt) {
 	grunt.registerTask('default', ['server']);
 
     grunt.registerTask('server', [
-        'shell:install',
+        'shell:bower',
+        'concat:js',
+        'less:development',
         'shell:express'
     ]);
 };
