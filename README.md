@@ -1,0 +1,1 @@
+Simple example of a blog built on Angular and Express
